@@ -1,6 +1,5 @@
 extern crate libc;
 use libc::c_uchar;
-use std::ptr;
 use std::ffi::CString;
 
 #[link(name="test")]
@@ -23,8 +22,6 @@ fn main() {
         //create a pointer to that CString's raw data and store it in c_str_ptrs
         c_str_ptrs.push(c_strs[c_strs.len() - 1].as_ptr() as *const c_uchar);
     }
-
-    c_str_ptrs.push(ptr::null()); //add a null terminator to the array of pointers
 
     unsafe { print_stuff(c_str_ptrs.as_ptr()); } //call print_stuff
 
